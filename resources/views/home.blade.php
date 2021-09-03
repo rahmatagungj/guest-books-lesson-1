@@ -2,7 +2,7 @@
 
 @include('layouts.navigation')
 
-@section('title',$title)
+@section('title', $title)
 
 @section('content')
     <main class="container p-5">
@@ -12,10 +12,10 @@
             </div>
         @endif
         @if ($error = Session('error'))
-        <div class="alert alert-danger">
-            {{ $error }}
-        </div>
-    @endif
+            <div class="alert alert-danger">
+                {{ $error }}
+            </div>
+        @endif
 
         <form action="{{ route('add_guest') }}" method="post">
             @csrf

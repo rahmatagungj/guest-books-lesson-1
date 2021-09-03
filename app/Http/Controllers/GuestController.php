@@ -14,8 +14,8 @@ class GuestController extends Controller
      */
     public function index()
     {
-        return view('home',[
-            'title'=>'Beranda'
+        return view('home', [
+            'title' => 'Beranda'
         ]);
     }
 
@@ -38,9 +38,9 @@ class GuestController extends Controller
     public function store(Request $request)
     {
 
-        $CHECK_DB = guest::where('name','=',$request->name)->get();
+        $CHECK_DB = guest::where('name', '=', $request->name)->get();
         if (!$CHECK_DB->isEmpty()) {
-            return redirect('/')->with('error','Nama sudah terdaftar');
+            return redirect('/')->with('error', 'Nama sudah terdaftar');
         }
 
         $this->validate($request, [
@@ -50,8 +50,7 @@ class GuestController extends Controller
         $guest->name = $request->name;
 
         if ($guest->save()) {
-            return redirect('/')->with('message','Tamu berhasil ditambahkan.');
-            
+            return redirect('/')->with('message', 'Tamu berhasil ditambahkan.');
         }
     }
 
@@ -97,12 +96,12 @@ class GuestController extends Controller
      */
     public function destroy(Guest $guest, $id)
     {
-        $CHECK_DB = guest::where('id','=',$id)->get();
+        $CHECK_DB = guest::where('id', '=', $id)->get();
         if ($CHECK_DB->isEmpty()) {
-            return redirect('/guest')->with('error','Nama tidak terdaftar');
+            return redirect('/guest')->with('error', 'Nama tidak terdaftar');
         }
-        guest::where('id','=',$id)->delete();
+        guest::where('id', '=', $id)->delete();
 
-        return redirect('/guest')->with('message','Tamu berhasil dihapus');
+        return redirect('/guest')->with('message', 'Tamu berhasil dihapus');
     }
 }

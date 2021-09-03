@@ -12,7 +12,7 @@ $LINKS = [
 
 @endphp
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">BUKU TAMU</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

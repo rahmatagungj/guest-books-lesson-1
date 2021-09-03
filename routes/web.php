@@ -16,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [GuestController::class, 'index']);
-Route::post('add', [GuestController::class,'store'])->name('add_guest');
-Route::delete('delete/{id}', [GuestController::class,'destroy']);
-Route::get('guest',[GuestListController::class,'index']);
+Route::post('add', [GuestController::class, 'store'])->name('add_guest');
+Route::delete('delete/{id}', [GuestController::class, 'destroy']);
+Route::get('guest', [GuestListController::class, 'index']);
