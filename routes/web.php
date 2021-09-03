@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\GuestListController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [GuestController::class, 'index']);
 Route::post('add', [GuestController::class,'store'])->name('add_guest');
+Route::get('guest',[GuestListController::class,'index']);

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Guest;
 use Illuminate\Http\Request;
 
-class GuestController extends Controller
+class GuestListController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,10 @@ class GuestController extends Controller
      */
     public function index()
     {
-        return view('home',[
-            'title'=>'Beranda'
+        $ALL_GUEST = Guest::get();
+        return view('guest',[
+            'title'=>'Daftar Tamu',
+            'ALL_GUEST'=>$ALL_GUEST
         ]);
     }
 
@@ -37,23 +39,7 @@ class GuestController extends Controller
      */
     public function store(Request $request)
     {
-
-        $CHECK_DB = guest::where('name','=',$request->name)->get();
-        if (!$CHECK_DB->isEmpty()) {
-            return redirect('/')->with('error','Nama sudah terdaftar');
-        }
-
-        $this->validate($request, [
-            'name' => 'required',
-        ]);
-
-        $guest = new Guest;
-        $guest->name = $request->name;
-
-        if ($guest->save()) {
-            return redirect('/')->with('message','Tamu berhasil ditambahkan.');
-            
-        }
+        //
     }
 
     /**
