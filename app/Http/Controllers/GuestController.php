@@ -46,7 +46,6 @@ class GuestController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-
         $guest = new Guest;
         $guest->name = $request->name;
 
@@ -93,11 +92,17 @@ class GuestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Guest  $guest
+     * @param  \App\Models\Gudestroyest  $guest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Guest $guest)
+    public function destroy(Guest $guest, $id)
     {
-        //
+        $CHECK_DB = guest::where('id','=',$id)->get();
+        if ($CHECK_DB->isEmpty()) {
+            return redirect('/guest')->with('error','Nama tidak terdaftar');
+        }
+        guest::where('id','=',$id)->delete();
+
+        return redirect('/guest')->with('message','Tamu berhasil dihapus');
     }
 }
