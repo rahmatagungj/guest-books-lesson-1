@@ -9,5 +9,5 @@ class Guest extends Model
 {
     use HasFactory;
     protected $table = 'guest';
-    protected $fillable = ['name'];
+    protected $fillable = ['id','name'];
 }

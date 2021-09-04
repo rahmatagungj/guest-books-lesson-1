@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guest;
 use Illuminate\Http\Request;
+use Alert;
 
 class GuestController extends Controller
 {
@@ -37,20 +38,22 @@ class GuestController extends Controller
      */
     public function store(Request $request)
     {
-
-        $CHECK_DB = guest::where('name', '=', $request->name)->get();
-        if (!$CHECK_DB->isEmpty()) {
-            return redirect('/')->with('error', 'Nama sudah terdaftar');
-        }
-
         $this->validate($request, [
             'name' => 'required',
         ]);
+
+        $CHECK_DB = guest::where('name', '=', $request->name)->get();
+        if (!$CHECK_DB->isEmpty()) {
+            Alert::error('Gagal','Nama sudah ada');
+            return redirect('/');
+        }
+
         $guest = new Guest;
         $guest->name = $request->name;
 
         if ($guest->save()) {
-            return redirect('/')->with('message', 'Tamu berhasil ditambahkan.');
+            Alert::success('Berhasil','Nama berhasil ditambahkan');
+            return redirect('/');
         }
     }
 
@@ -94,14 +97,18 @@ class GuestController extends Controller
      * @param  \App\Models\Gudestroyest  $guest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Guest $guest, $id)
+    public function destroy($id)
     {
         $CHECK_DB = guest::where('id', '=', $id)->get();
         if ($CHECK_DB->isEmpty()) {
-            return redirect('/guest')->with('error', 'Nama tidak terdaftar');
+            Alert::error('Gagal','Nama tidak terdaftar');
+            return redirect('/guest');
         }
-        guest::where('id', '=', $id)->delete();
 
-        return redirect('/guest')->with('message', 'Tamu berhasil dihapus');
+
+        if (guest::where('id', '=', $id)->delete()) {
+            Alert::success('Berhasil','Tamu berhasil dihapus');
+            return redirect('/guest');
+        }
     }
 }

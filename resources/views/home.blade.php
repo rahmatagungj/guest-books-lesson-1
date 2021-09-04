@@ -6,16 +6,6 @@
 
 @section('content')
     <main class="container p-5">
-        @if ($message = Session('message'))
-            <div class="alert alert-success">
-                {{ $message }}
-            </div>
-        @endif
-        @if ($error = Session('error'))
-            <div class="alert alert-danger">
-                {{ $error }}
-            </div>
-        @endif
 
         <form action="{{ route('add_guest') }}" method="post">
             @csrf
